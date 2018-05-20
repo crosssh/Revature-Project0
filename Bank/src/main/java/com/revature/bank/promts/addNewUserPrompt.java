@@ -39,7 +39,8 @@ public class addNewUserPrompt implements Prompt {
 
 		transaction.add(new Transaction("deposit", intialAmount, LocalDateTime.now()));
 
-		user = new User(username, password, firstName, lastName, new Account(bd.getUsers().size()+1, intialAmount, transaction), false);
+		user = new User(username, password, firstName, lastName,
+				new Account(bd.getUsers().size() + 1, intialAmount, transaction), false);
 
 		if (bd.addUser(user)) {
 			System.out.println("New user added.");

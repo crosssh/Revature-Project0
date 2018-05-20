@@ -27,15 +27,15 @@ public class LoginPrompt implements Prompt {
 			System.out.println("Please enter password:");
 			String password = scan.nextLine();
 
-			if (checkUserCridentials(users, username, password, bd)) 
+			if (checkUserCridentials(users, username, password, bd))
 				return new MenuPromt();
 			else
 				System.out.println("Invalid username or password");
-			
+
 			break;
 		case "2":
 			return new addNewUserPrompt();
-			
+
 		default:
 			break;
 		}

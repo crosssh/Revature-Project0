@@ -139,7 +139,7 @@ public class BankSerializer implements BankDao {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber())
 				newUser = false;
 		}
-		System.out.println(newUser);
+
 		if (newUser)
 			users.add(user);
 

@@ -18,15 +18,13 @@ public class MenuPromt implements Prompt {
 	public Prompt run() {
 
 		User user = getCurrentUser(bd);
-		System.out.println(user);
 		System.out.println("Press 1 for withdral.");
 		System.out.println("Press 2 for deposit.");
 		System.out.println("Press 3 to view balance.");
 		System.out.println("Press 4 to view transactions.");
 		System.out.println("Press 5 to Log out");
-		if(user.getBankAccount().getAccountNumber() == 0) 
+		if (user.getBankAccount().getAccountNumber() == 0)
 			System.out.println("Press 6 to view all transactions");
-		
 
 		String input = scan.nextLine();
 
@@ -42,8 +40,9 @@ public class MenuPromt implements Prompt {
 			break;
 		case "4":
 			transactions = bd.getTransactions(user);
-			for(Transaction transaction : transactions){
-				System.out.println("A " + transaction.getType() + " for the amount of " + transaction.getAmount() + " was made on " + transaction.getDate());
+			for (Transaction transaction : transactions) {
+				System.out.println("A " + transaction.getType() + " for the amount of " + transaction.getAmount()
+						+ " was made on " + transaction.getDate());
 			}
 			break;
 		case "5":
