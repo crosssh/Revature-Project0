@@ -87,8 +87,7 @@ public class BankSerializer implements BankDao {
 		// TODO Auto-generated method stub
 		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber()) {
-				System.out.println("Account balance: " + u.getBankAccount().getAccountBalance());
-
+				System.out.printf("\nAccount balance: $%,.2f\n", u.getBankAccount().getAccountBalance());
 			}
 		}
 	}
@@ -204,8 +203,9 @@ public class BankSerializer implements BankDao {
 			if (u.getBankAccount().getAccountNumber() != 0) {
 				transactions = u.getBankAccount().getTransactions();
 				for (Transaction transaction : transactions) {
-					System.out.println(u.getUsername() + " made a " + transaction.getType() + " for "
-							+ transaction.getAmount() + " on " + transaction.getDate());
+					System.out.printf("\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp", 
+							transaction.getType(), transaction.getAmount(), transaction.getDate());
+
 				}
 			}
 		}

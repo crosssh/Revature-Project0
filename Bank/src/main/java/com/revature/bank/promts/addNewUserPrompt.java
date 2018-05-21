@@ -43,10 +43,10 @@ public class addNewUserPrompt implements Prompt {
 				new Account(bd.getUsers().size() + 1, intialAmount, transaction), false);
 
 		if (bd.addUser(user)) {
-			System.out.println("New user added.");
+			System.out.println("New user added./n");
 			return new LoginPrompt();
 		} else
-			System.out.println("Unable to add user. Please try again.");
+			System.out.println("Unable to add user. Please try again./n");
 
 		return this;
 	}

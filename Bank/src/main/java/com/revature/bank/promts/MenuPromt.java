@@ -18,7 +18,7 @@ public class MenuPromt implements Prompt {
 	public Prompt run() {
 
 		User user = getCurrentUser(bd);
-		System.out.println("Press 1 for withdral.");
+		System.out.println("\nPress 1 for withdral.");
 		System.out.println("Press 2 for deposit.");
 		System.out.println("Press 3 to view balance.");
 		System.out.println("Press 4 to view transactions.");
@@ -41,9 +41,9 @@ public class MenuPromt implements Prompt {
 		case "4":
 			transactions = bd.getTransactions(user);
 			for (Transaction transaction : transactions) {
-				System.out.println("A " + transaction.getType() + " for the amount of " + transaction.getAmount()
-						+ " was made on " + transaction.getDate());
+				System.out.printf("\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp", transaction.getType(), transaction.getAmount(), transaction.getDate());
 			}
+			System.out.println();
 			break;
 		case "5":
 			bd.userLogout(user);
