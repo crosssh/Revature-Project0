@@ -41,8 +41,7 @@ public class BankSerializer implements BankDao {
 				}
 			}
 		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
-			outStream.writeObject(users); // serialize the list to the
-											// file
+			outStream.writeObject(users);
 			return true;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -68,8 +67,7 @@ public class BankSerializer implements BankDao {
 				u.getBankAccount().setTransactions(transaction);
 			}
 		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
-			outStream.writeObject(users); // serialize the list to the
-											// file
+			outStream.writeObject(users);
 			return true;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -97,7 +95,6 @@ public class BankSerializer implements BankDao {
 		// TODO Auto-generated method stub
 		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber()) {
-				// System.out.println(u.getBankAccount().getTransactions());
 				transactions = u.getBankAccount().getTransactions();
 			}
 		}
@@ -111,8 +108,7 @@ public class BankSerializer implements BankDao {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber())
 				u.setLoggedIn(true);
 		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
-			outStream.writeObject(users); // serialize the list to the
-											// file
+			outStream.writeObject(users);
 			return true;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -128,21 +124,22 @@ public class BankSerializer implements BankDao {
 
 	@Override
 	public boolean addUser(User user) {
-		boolean newUser = true;
-		if (users == null) { // initialize a new list if none was given
-								// to us
+		if (users == null) {
 			users = new ArrayList<>();
 		}
-		// add the new book to the list
+
 		for (User u : users) {
-			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber())
-				newUser = false;
-			else if (u.getUsername().equals(user.getUsername()))
-				newUser = false;
+			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber()) {
+				//System.out.println("Something went terribly wrong please try again.\n");
+				return false;
+			} else if (u.getUsername().equals(user.getUsername())) {
+				System.out.println("Username is already being used.\n"
+						+ "please try again.\n");
+				return false;
+			}
 		}
 
-		if (newUser)
-			users.add(user);
+		users.add(user);
 
 		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
 			outStream.writeObject(users); // serialize the list to the
@@ -205,7 +202,7 @@ public class BankSerializer implements BankDao {
 			for (User u : users) {
 				if (u.getBankAccount().getAccountNumber() != 0) {
 					transactions = u.getBankAccount().getTransactions();
-					System.out.printf("\nUser: %s", u.getUsername());
+					System.out.printf("User: %s", u.getUsername());
 					for (Transaction transaction : transactions) {
 						System.out.printf(
 								"\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp",
@@ -213,7 +210,7 @@ public class BankSerializer implements BankDao {
 
 					}
 				}
-				System.out.println();
+				System.out.println("\n");
 			}
 		} else
 			System.out.println("No transactions currently have been made at this time.");

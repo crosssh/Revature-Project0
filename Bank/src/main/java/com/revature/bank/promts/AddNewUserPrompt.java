@@ -40,14 +40,14 @@ public class AddNewUserPrompt implements Prompt {
 		transaction.add(new Transaction("deposit", intialAmount, LocalDateTime.now()));
 
 		user = new User(username, password, firstName, lastName,
-				new Account(bd.getUsers().size() + 1, intialAmount, transaction), false);
+				new Account(bd.getUsers().size() + 1, intialAmount, transaction), true);
 
 		if (bd.addUser(user)) {
-			System.out.println("New user added.");
-			System.out.println();
-			return new LoginPrompt();
-		} else
-			System.out.println("Unable to add user. Please try again.");
+			System.out.println("\nWelcome " + user.getUsername() + ".");
+			return new MenuPromt();
+		}
+		
+		username = scan.nextLine();
 
 		return this;
 	}
