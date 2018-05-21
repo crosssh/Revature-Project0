@@ -57,7 +57,7 @@ public class LoginPrompt implements Prompt {
 	public boolean checkUserCridentials(List<User> users, String username, String password, BankDao bd) {
 		for (User user : users) {
 			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-				System.out.println("Welcome " + username);
+				System.out.println("\nWelcome " + username);
 				if (bd.userLoggedIn(user))
 					return true;
 			}

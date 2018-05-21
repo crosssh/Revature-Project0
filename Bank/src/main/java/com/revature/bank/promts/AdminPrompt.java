@@ -17,7 +17,7 @@ public class AdminPrompt implements Prompt {
 		User user = MenuPromt.getCurrentUser(bd);
 
 		System.out.println("\nPress 1 to view all transactions.");
-		System.out.println("Presss 2 to Logout.");
+		System.out.println("Press 2 to Logout.");
 		String input = scan.nextLine();
 
 		switch (input) {
