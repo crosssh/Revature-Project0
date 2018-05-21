@@ -10,11 +10,11 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6961137447401010964L;
-	String username;
-	String password;
-	String firstName;
-	String lastName;
-	Account bankAccount;
+	private String username;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private Account bankAccount;
 	boolean loggedIn;
 
 	public User() {

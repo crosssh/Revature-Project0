@@ -130,11 +130,11 @@ public class BankSerializer implements BankDao {
 
 		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber()) {
-				//System.out.println("Something went terribly wrong please try again.\n");
+				// System.out.println("Something went terribly wrong please try
+				// again.\n");
 				return false;
 			} else if (u.getUsername().equals(user.getUsername())) {
-				System.out.println("Username is already being used.\n"
-						+ "please try again.\n");
+				System.out.println("Username is already being used.\n" + "please try again.\n");
 				return false;
 			}
 		}

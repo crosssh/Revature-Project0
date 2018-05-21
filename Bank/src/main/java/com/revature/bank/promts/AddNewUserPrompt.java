@@ -46,7 +46,7 @@ public class AddNewUserPrompt implements Prompt {
 			System.out.println("\nWelcome " + user.getUsername() + ".");
 			return new MenuPromt();
 		}
-		
+
 		username = scan.nextLine();
 
 		return this;
