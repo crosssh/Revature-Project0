@@ -201,18 +201,23 @@ public class BankSerializer implements BankDao {
 	@Override
 	public void viewAllTransactions(User user) {
 		// TODO Auto-generated method stub
-		for (User u : users) {
-			if (u.getBankAccount().getAccountNumber() != 0) {
-				transactions = u.getBankAccount().getTransactions();
-				System.out.printf("\nUser: %s", u.getUsername());
-				for (Transaction transaction : transactions) {
-					System.out.printf("\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp",
-							transaction.getType(), transaction.getAmount(), transaction.getDate());
+		if (users.size() > 1) {
+			for (User u : users) {
+				if (u.getBankAccount().getAccountNumber() != 0) {
+					transactions = u.getBankAccount().getTransactions();
+					System.out.printf("\nUser: %s", u.getUsername());
+					for (Transaction transaction : transactions) {
+						System.out.printf(
+								"\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp",
+								transaction.getType(), transaction.getAmount(), transaction.getDate());
 
+					}
 				}
+				System.out.println();
 			}
-			System.out.println();
-		}
+		} else
+			System.out.println("No transactions currently have been made at this time.");
+
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.revature.bank.account.Account;
 import com.revature.bank.dao.BankDao;
 import com.revature.bank.dao.BankSerializer;
 import com.revature.bank.user.User;
@@ -16,6 +17,8 @@ public class LoginPrompt implements Prompt {
 	private User user;
 
 	public Prompt run() {
+		User admin = new User("admin", "admin", "admin", "admin", new Account(0, 0, null), false);
+		bd.addUser(admin);
 
 		users = bd.getUsers();
 		System.out.println("Press 1 to login");
