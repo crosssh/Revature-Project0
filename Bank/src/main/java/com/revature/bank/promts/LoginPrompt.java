@@ -13,6 +13,7 @@ public class LoginPrompt implements Prompt {
 	private BankDao bd = new BankSerializer();
 	private Scanner scan = new Scanner(System.in);
 	private List<User> users = new ArrayList<>();
+	private User user;
 
 	public Prompt run() {
 
@@ -27,9 +28,13 @@ public class LoginPrompt implements Prompt {
 			System.out.println("Please enter password:");
 			String password = scan.nextLine();
 
-			if (checkUserCridentials(users, username, password, bd))
-				return new MenuPromt();
-			else
+			if (checkUserCridentials(users, username, password, bd)) {
+				user = MenuPromt.getCurrentUser(bd);
+				if (user.getBankAccount().getAccountNumber() == 0)
+					return new AdminPrompt();
+				else
+					return new MenuPromt();
+			} else
 				System.out.println("Invalid username or password");
 
 			break;

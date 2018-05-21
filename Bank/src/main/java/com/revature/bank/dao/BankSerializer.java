@@ -137,6 +137,8 @@ public class BankSerializer implements BankDao {
 		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber())
 				newUser = false;
+			else if (u.getUsername().equals(user.getUsername()))
+				newUser = false;
 		}
 
 		if (newUser)
@@ -202,12 +204,14 @@ public class BankSerializer implements BankDao {
 		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() != 0) {
 				transactions = u.getBankAccount().getTransactions();
+				System.out.printf("\nUser: %s", u.getUsername());
 				for (Transaction transaction : transactions) {
-					System.out.printf("\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp", 
+					System.out.printf("\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp",
 							transaction.getType(), transaction.getAmount(), transaction.getDate());
 
 				}
 			}
+			System.out.println();
 		}
 	}
 

@@ -23,8 +23,6 @@ public class MenuPromt implements Prompt {
 		System.out.println("Press 3 to view balance.");
 		System.out.println("Press 4 to view transactions.");
 		System.out.println("Press 5 to Log out");
-		if (user.getBankAccount().getAccountNumber() == 0)
-			System.out.println("Press 6 to view all transactions");
 
 		String input = scan.nextLine();
 
@@ -41,16 +39,14 @@ public class MenuPromt implements Prompt {
 		case "4":
 			transactions = bd.getTransactions(user);
 			for (Transaction transaction : transactions) {
-				System.out.printf("\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp", transaction.getType(), transaction.getAmount(), transaction.getDate());
+				System.out.printf("\nA %s for the amount of $%,.2f was made on %tB %<te, %<tY at %<tH:%<tM %<Tp",
+						transaction.getType(), transaction.getAmount(), transaction.getDate());
 			}
 			System.out.println();
 			break;
 		case "5":
 			bd.userLogout(user);
 			return new LoginPrompt();
-		case "6":
-			bd.viewAllTransactions(user);
-			break;
 
 		default:
 			break;
@@ -59,7 +55,7 @@ public class MenuPromt implements Prompt {
 		return this;
 	}
 
-	public User getCurrentUser(BankDao bd) {
+	public static User getCurrentUser(BankDao bd) {
 		List<User> users = bd.getUsers();
 
 		for (User u : users) {
