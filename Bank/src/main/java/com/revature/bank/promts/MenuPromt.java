@@ -27,15 +27,19 @@ public class MenuPromt implements Prompt {
 		String input = scan.nextLine();
 
 		switch (input) {
+		//Withdrawal money from the users account.
 		case "1":
-			bd.witdrawl(user);
+			bd.witdrawal(user);
 			break;
+		//deposit money into the users account
 		case "2":
 			bd.deposit(user);
 			break;
+		//display the users current balance
 		case "3":
 			bd.viewBalance(user);
 			break;
+		//list all of the users transactions since the account was created
 		case "4":
 			transactions = bd.getTransactions(user);
 			for (Transaction transaction : transactions) {
@@ -44,6 +48,7 @@ public class MenuPromt implements Prompt {
 			}
 			System.out.println();
 			break;
+		//log the user out
 		case "5":
 			bd.userLogout(user);
 			return new LoginPrompt();
@@ -55,6 +60,7 @@ public class MenuPromt implements Prompt {
 		return this;
 	}
 
+	//this will get the current user that is logged in
 	public static User getCurrentUser(BankDao bd) {
 		List<User> users = bd.getUsers();
 

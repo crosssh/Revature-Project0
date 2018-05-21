@@ -22,13 +22,18 @@ public class BankSerializer implements BankDao {
 	private List<Transaction> transactions;
 	private double amount;
 
+	// this will take in a user and try to withdrawal the amount of money that
+	// is requested
+	// if the user doesn't have enough money the user will be notified and sent
+	// back to the
+	// menu prompt.
 	@Override
-	public boolean witdrawl(User user) {
+	public boolean witdrawal(User user) {
 
 		System.out.println("Please enter the amount you would like to withdrawl.");
 		amount = scan.nextDouble();
 
-		for (User u : users)
+		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber()) {
 				if (u.getBankAccount().getAccountBalance() >= amount) {
 					transaction = getTransactions(user);
@@ -40,46 +45,32 @@ public class BankSerializer implements BankDao {
 					return false;
 				}
 			}
-		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
-			outStream.writeObject(users);
-			return true;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-
-		return false;
+		
+		return outputToFile(users);
 	}
 
+	// This will ask the user how much money they are adding to their account
+	// and then
+	// add that amount to their account balance
 	@Override
 	public boolean deposit(User user) {
 		System.out.print("Please enter the amount you would like to deposit: ");
 		amount = scan.nextDouble();
 
-		for (User u : users)
+		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber()) {
 				transaction = getTransactions(user);
 				transaction.add(new Transaction("deposit", amount, LocalDateTime.now()));
 				u.getBankAccount().setAccountBalance(u.getBankAccount().getAccountBalance() + amount);
 				u.getBankAccount().setTransactions(transaction);
 			}
-		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
-			outStream.writeObject(users);
-			return true;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-
-		return false;
+		
+		return outputToFile(users);
 	}
 
+	// this will print out the current users balance.
 	@Override
 	public void viewBalance(User user) {
 		// TODO Auto-generated method stub
@@ -90,6 +81,7 @@ public class BankSerializer implements BankDao {
 		}
 	}
 
+	// this will return a list of all the current users transactions
 	@Override
 	public List<Transaction> getTransactions(User user) {
 		// TODO Auto-generated method stub
@@ -102,26 +94,21 @@ public class BankSerializer implements BankDao {
 		return transactions;
 	}
 
+	// This will set the user login status to true
 	@Override
 	public boolean userLoggedIn(User user) {
-		for (User u : users)
+		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber())
 				u.setLoggedIn(true);
-		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
-			outStream.writeObject(users);
-			return true;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-
-		return false;
+		
+		return outputToFile(users);
 
 	}
 
+	// this will add a new user to the if the account is not the same and the
+	// username is
+	// not already being used
 	@Override
 	public boolean addUser(User user) {
 		if (users == null) {
@@ -138,25 +125,14 @@ public class BankSerializer implements BankDao {
 				return false;
 			}
 		}
-
+		
 		users.add(user);
 
-		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
-			outStream.writeObject(users); // serialize the list to the
-											// file
-			return true;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		return false;
+		return outputToFile(users);
 
 	}
 
+	// returns a list of all the users
 	@Override
 	public List<User> getUsers() {
 		try (ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(FILE_LOCATION))) {
@@ -171,30 +147,24 @@ public class BankSerializer implements BankDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 
+	// this will change the users login status to false
 	@Override
 	public boolean userLogout(User user) {
 		// TODO Auto-generated method stub
-		for (User u : users)
+		for (User u : users) {
 			if (u.getBankAccount().getAccountNumber() == user.getBankAccount().getAccountNumber())
 				u.setLoggedIn(false);
-		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
-			outStream.writeObject(users); // serialize the list to the
-											// file
-			return true;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-
-		return false;
+		
+		return outputToFile(users);
 	}
 
+	// this will display the transactions for all of the users
+	// only the admin can do this
 	@Override
 	public void viewAllTransactions(User user) {
 		// TODO Auto-generated method stub
@@ -215,6 +185,21 @@ public class BankSerializer implements BankDao {
 		} else
 			System.out.println("No transactions currently have been made at this time.");
 
+	}
+
+	public boolean outputToFile(List<User> users) {
+		try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION))) {
+			outStream.writeObject(users);
+			return true;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		return false;
 	}
 
 }

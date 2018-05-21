@@ -25,6 +25,7 @@ public class LoginPrompt implements Prompt {
 		System.out.println("press 2 to register");
 		String input = scan.nextLine();
 		switch (input) {
+		// Get the users name and password and if they are valid log them into the bank
 		case "1":
 			System.out.println("Please enter username:");
 			String username = scan.nextLine();
@@ -33,6 +34,7 @@ public class LoginPrompt implements Prompt {
 
 			if (checkUserCridentials(users, username, password, bd)) {
 				user = MenuPromt.getCurrentUser(bd);
+				// IF the bank account is 0 then the admin has logged in go the the admin page
 				if (user.getBankAccount().getAccountNumber() == 0)
 					return new AdminPrompt();
 				else
@@ -41,6 +43,7 @@ public class LoginPrompt implements Prompt {
 				System.out.println("Invalid username or password");
 
 			break;
+			// go to the new user prompt.
 		case "2":
 			return new AddNewUserPrompt();
 

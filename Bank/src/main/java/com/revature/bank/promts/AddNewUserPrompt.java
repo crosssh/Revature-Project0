@@ -25,7 +25,7 @@ public class AddNewUserPrompt implements Prompt {
 
 	@Override
 	public Prompt run() {
-		// TODO Auto-generated method stub
+		// get all of the new users information and try to add them to the file
 		System.out.println("Enter username");
 		username = scan.nextLine();
 		System.out.println("Enter first name");

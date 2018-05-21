@@ -9,7 +9,7 @@ public interface BankDao {
 
 	boolean addUser(User user);
 
-	boolean witdrawl(User user);
+	boolean witdrawal(User user);
 
 	boolean deposit(User user);
 
