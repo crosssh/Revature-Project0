@@ -39,7 +39,7 @@ public class LoginPrompt implements Prompt {
 
 			break;
 		case "2":
-			return new addNewUserPrompt();
+			return new AddNewUserPrompt();
 
 		default:
 			break;

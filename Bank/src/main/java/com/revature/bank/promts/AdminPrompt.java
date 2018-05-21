@@ -1,9 +1,7 @@
 package com.revature.bank.promts;
 
-import java.util.List;
 import java.util.Scanner;
 
-import com.revature.bank.account.Transaction;
 import com.revature.bank.dao.BankDao;
 import com.revature.bank.dao.BankSerializer;
 import com.revature.bank.user.User;

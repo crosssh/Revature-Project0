@@ -11,7 +11,7 @@ import com.revature.bank.dao.BankDao;
 import com.revature.bank.dao.BankSerializer;
 import com.revature.bank.user.User;
 
-public class addNewUserPrompt implements Prompt {
+public class AddNewUserPrompt implements Prompt {
 
 	private BankDao bd = new BankSerializer();
 	private Scanner scan = new Scanner(System.in);
@@ -43,10 +43,11 @@ public class addNewUserPrompt implements Prompt {
 				new Account(bd.getUsers().size() + 1, intialAmount, transaction), false);
 
 		if (bd.addUser(user)) {
-			System.out.println("New user added./n");
+			System.out.println("New user added.");
+			System.out.println();
 			return new LoginPrompt();
 		} else
-			System.out.println("Unable to add user. Please try again./n");
+			System.out.println("Unable to add user. Please try again.");
 
 		return this;
 	}
